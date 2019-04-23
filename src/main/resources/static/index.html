@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MarkDown_entry</title>
+    <script type="text/javascript" src="./js/showdown.min.js"></script>
+	<!-- <link rel="stylesheet" -->
+      <!-- href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/default.min.css"> -->
+	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script> -->
+	<script type="text/css" src="./js/styles.css"></script>
+
+	
+</head>
+<style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+     font-size: 16px;
+      line-height: 1.42857143;
+      color: #333;
+      background-color: #fff;
+    }
+    ul li {
+        line-height: 24px;
+    }
+    blockquote {
+        border-left:#eee solid 5px;
+        padding-left:20px;
+    }
+    code {
+        color:#D34B62;
+        background: #F9F2F4;
+    }
+</style>
+<body>
+<div>
+    <textarea id="content" style="height:400px;width:80%;" onkeyup="compile()"></textarea>
+	<!-- <button type="button">同步数据库</button> -->
+	<!-- 可以不加在项目里，加在markdown里，配合html+js的写法，function调用规则 -->
+    <div id="result"></div>
+</div>
+<script type="text/javascript">
+function compile(){
+    var text = document.getElementById("content").value;
+    var converter = new showdown.Converter();
+    var html = converter.makeHtml(text);
+    document.getElementById("result").innerHTML = html;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.daily.dao.SysLawEntryMapper">
+
+    <resultMap id="mapList" type="com.daily.domain.SysLawEntry">
+        <result column="discipline" property="discipline" />
+        <result column="chapter" property="chapter" />
+        <result column="aspect"  property="aspect"  />
+        <result column="content" property="content" />
+        <result column="supplement" property="supplement" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+            discipline,chapter,aspect,content,supplement
+    </sql>
+
+    <insert id="addLawEntry" parameterType="com.daily.domain.SysLawEntry">
+        INSERT INTO lawEntry_0(guid, discipline, chapter, aspect, content, createDate, konw, supplement)
+          VALUES(UUID(), #{discipline}, #{chapter}, #{aspect}, #{content},curdate() ,'N', #{supplement})
+    </insert>
+
+    <select id="list_Study_LawEntries" resultMap="mapList">
+        SELECT
+          <include refid="Base_Column_List" />
+        FROM
+            lawEntry_0 l
+        WHERE
+        l.createDate IN ( CURDATE( ) - 1 )
+        OR l.createDate IN ( CURDATE( ) - 2 )
+        OR l.createDate IN ( CURDATE( ) - 4 )
+        OR l.createDate IN ( CURDATE( ) - 7 )
+        OR l.createDate IN ( CURDATE( ) - 15 )
+        OR l.createDate IN ( CURDATE( ) - 30 )
+        OR l.createDate IN ( CURDATE( ) - 90 )
+        OR l.createDate IN ( CURDATE( ) - 180 )
+        ORDER BY l.discipline,l.chapter,l.createDate desc
+    </select>
+</mapper>
