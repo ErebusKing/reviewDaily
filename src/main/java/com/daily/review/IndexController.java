@@ -37,17 +37,6 @@ public class IndexController {
         return "redirect:/index.html";
     }
 
-    @ResponseBody
-    @RequestMapping(value="/add", method = RequestMethod.GET)
-    public String addEntryList(HttpServletRequest request)
-    {
-        String content = "";
-
-
-        System.out.println(content);
-        return content;
-    }
-
 
     @ResponseBody
     @RequestMapping(value="/law", method = RequestMethod.GET)
@@ -61,7 +50,6 @@ public class IndexController {
         System.out.println(content);
 
         return treeCss2Content(content,"./js/tree.css");
-//        return "<link rel=\"stylesheet\" href=\"./js/tree.css\" type=\"text/css\" /><div class=\"tree\">"+content+"</div>";
     }
 
 
@@ -97,11 +85,15 @@ public class IndexController {
         int count = 0;
         if (nodes != null && nodes.size() != 0) {
             for (TreeNode node : nodes) {
+                //最末节点增加序号
+                if (null == node.getChildren()  || 0 == node.getChildren().size() ){
+                    node.setName((++count)+". "+node.getName());
+                }
+
                 if("1" == node.getId() )
                 {
                     content += "<h"+node.getId()+">"+node.getName() + "</h"+node.getId()+">" + nodes2Content(node.getChildren());
                 }else{
-//                    content += "<ul><li><span><i class=\"fa fa-minus-circle\"></i>"+node.getName() + "</span></li><ul>"+ nodes2Content(node.getChildren()) +"</ul></ul>";
                     content += "<ul><li>"+node.getName() + "</span></li><ul>"+ nodes2Content(node.getChildren()) +"</ul></ul>";
                 }
             }

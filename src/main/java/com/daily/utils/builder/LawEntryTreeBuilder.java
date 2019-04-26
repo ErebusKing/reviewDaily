@@ -81,7 +81,7 @@ public class LawEntryTreeBuilder extends TreeBuilder {
             node = new TreeNode("1",lawEntry.getDiscipline(),"0","0");
             secChild = new TreeNode("2",lawEntry.getChapter(),"1",lawEntry.getDiscipline());
             thrChild = new TreeNode("3",lawEntry.getAspect(),"2",lawEntry.getChapter());
-            String supplement = ""==lawEntry.getSupplement()?"":"(" +lawEntry.getSupplement()+")";
+            String supplement = "".equalsIgnoreCase(lawEntry.getSupplement())?"":"(" +lawEntry.getSupplement()+")";
             fthChild = new TreeNode("4",lawEntry.getContent()+supplement,"3",lawEntry.getAspect());
 
             nodes.add(node);

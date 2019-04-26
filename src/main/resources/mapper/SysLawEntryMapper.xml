@@ -33,6 +33,6 @@
         OR l.createDate IN ( CURDATE( ) - 30 )
         OR l.createDate IN ( CURDATE( ) - 90 )
         OR l.createDate IN ( CURDATE( ) - 180 )
-        ORDER BY l.discipline,l.chapter,l.createDate desc
+        ORDER BY l.discipline,l.chapter,l.createDate,l.lev desc
     </select>
 </mapper>
