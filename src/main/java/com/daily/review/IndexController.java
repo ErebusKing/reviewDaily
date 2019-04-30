@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 @Controller
@@ -42,29 +43,26 @@ public class IndexController {
     @RequestMapping(value="/law", method = RequestMethod.GET)
     public String lawEntryList()
     {
+        System.out.println("获得等待复习的法学数据");
         LawEntryTreeBuilder builder = new LawEntryTreeBuilder();
         List<SysLawEntry> entries = lawEntryService.list_Study_LawEntries();
         String content = nodes2Content(builder.entry2ContentNode(entries));
         sendLawMail(content);
 
-        System.out.println(content);
-
         return treeCss2Content(content,"./js/tree.css");
     }
 
     @ResponseBody
-    @RequestMapping(value="/lawAll", method = RequestMethod.GET)
-    public String lawEntryAAll()
+    @RequestMapping(value="/all", method = RequestMethod.GET)
+    public String lawEntryAll()
     {
+        System.out.println("查询所有法学数据");
         LawEntryTreeBuilder builder = new LawEntryTreeBuilder();
         List<SysLawEntry> entries = lawEntryService.list_Study_All();
         String content = nodes2Content(builder.entry2ContentNode(entries));
 
         return treeCss2Content(content,"./js/tree.css");
     }
-
-
-
 
 
 

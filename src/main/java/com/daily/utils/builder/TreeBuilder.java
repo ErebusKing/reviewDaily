@@ -105,7 +105,7 @@ public class TreeBuilder {
                                 .thenComparing(TreeNode::getId).thenComparing(TreeNode::getParentName))),
                         ArrayList::new)
         );
-        unique.forEach(p -> System.out.println(p));
+//        unique.forEach(p -> System.out.println(p));
         return unique;
     }
 }
