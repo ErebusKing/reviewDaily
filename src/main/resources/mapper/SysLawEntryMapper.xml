@@ -35,4 +35,13 @@
         OR l.createDate IN ( CURDATE( ) - 180 )
         ORDER BY l.discipline,l.chapter,l.createDate,l.lev desc
     </select>
+
+    <select id="list_Study_All" resultMap="mapList">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+        lawEntry_0 l
+        ORDER BY l.discipline,l.chapter,l.createDate,l.lev desc
+    </select>
+
 </mapper>

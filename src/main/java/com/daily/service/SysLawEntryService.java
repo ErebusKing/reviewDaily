@@ -10,5 +10,7 @@ public interface SysLawEntryService {
 
     List<SysLawEntry> list_Study_LawEntries();
 
+    List<SysLawEntry> list_Study_All();
+
 
 }

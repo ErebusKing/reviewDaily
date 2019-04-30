@@ -52,6 +52,21 @@ public class IndexController {
         return treeCss2Content(content,"./js/tree.css");
     }
 
+    @ResponseBody
+    @RequestMapping(value="/lawAll", method = RequestMethod.GET)
+    public String lawEntryAAll()
+    {
+        LawEntryTreeBuilder builder = new LawEntryTreeBuilder();
+        List<SysLawEntry> entries = lawEntryService.list_Study_All();
+        String content = nodes2Content(builder.entry2ContentNode(entries));
+
+        return treeCss2Content(content,"./js/tree.css");
+    }
+
+
+
+
+
 
     /**
      * 增加样式
@@ -73,6 +88,11 @@ public class IndexController {
 
         return body;
     }
+
+
+
+
+
 
     /**
      * law_0 得到的 Node 转为实际的邮件内容
@@ -120,5 +140,7 @@ public class IndexController {
 
 
     }
+
+
 
 }

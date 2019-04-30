@@ -12,4 +12,6 @@ public interface SysLawEntryMapper{
 
     List<SysLawEntry> list_Study_LawEntries();
 
+    List<SysLawEntry> list_Study_All();
+
 }
