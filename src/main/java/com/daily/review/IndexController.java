@@ -46,6 +46,8 @@ public class IndexController {
         System.out.println("获得等待复习的法学数据");
         LawEntryTreeBuilder builder = new LawEntryTreeBuilder();
         List<SysLawEntry> entries = lawEntryService.list_Study_LawEntries();
+        if (entries == null || entries.size() == 0)
+            return "";
         String content = nodes2Content(builder.entry2ContentNode(entries));
         sendLawMail(content);
 
@@ -59,6 +61,8 @@ public class IndexController {
         System.out.println("查询所有法学数据");
         LawEntryTreeBuilder builder = new LawEntryTreeBuilder();
         List<SysLawEntry> entries = lawEntryService.list_Study_All();
+        if (entries == null || entries.size() == 0)
+            return "";
         String content = nodes2Content(builder.entry2ContentNode(entries));
 
         return treeCss2Content(content,"./js/tree.css");
