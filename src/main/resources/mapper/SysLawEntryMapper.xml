@@ -25,14 +25,14 @@
         FROM
             lawEntry_0 l
         WHERE
-        l.createDate IN ( CURDATE( ) - 1 )
-        OR l.createDate IN ( CURDATE( ) - 2 )
-        OR l.createDate IN ( CURDATE( ) - 4 )
-        OR l.createDate IN ( CURDATE( ) - 7 )
-        OR l.createDate IN ( CURDATE( ) - 15 )
-        OR l.createDate IN ( CURDATE( ) - 30 )
-        OR l.createDate IN ( CURDATE( ) - 90 )
-        OR l.createDate IN ( CURDATE( ) - 180 )
+        l.createDate IN ( CURDATE( ) - INTERVAL 1 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 2 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 4 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 7 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 15 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 30 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 90 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 180 DAY )
         ORDER BY l.discipline,l.chapter,l.createDate,l.lev desc
     </select>
 
