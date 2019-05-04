@@ -15,8 +15,8 @@
     </sql>
 
     <insert id="addLawEntry" parameterType="com.daily.domain.SysLawEntry">
-        INSERT INTO lawEntry_0(guid, discipline, chapter, aspect, content, createDate, konw, supplement)
-          VALUES(UUID(), #{discipline}, #{chapter}, #{aspect}, #{content},curdate() ,'N', #{supplement})
+        INSERT INTO lawEntry_0( discipline, chapter, aspect, content, createDate, konw, supplement)
+          VALUES( #{discipline}, #{chapter}, #{aspect}, #{content},curdate() ,'N', #{supplement})
     </insert>
 
     <select id="list_Study_LawEntries" resultMap="mapList">
