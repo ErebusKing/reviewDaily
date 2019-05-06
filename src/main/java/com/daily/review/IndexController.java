@@ -2,24 +2,21 @@ package com.daily.review;
 
 import com.daily.domain.SysLawEntry;
 import com.daily.service.SysLawEntryService;
-import com.daily.utils.Node.TreeNode;
-import com.daily.utils.builder.LawEntryTreeBuilder;
+import com.utils.brs.MailSimple;
+import com.utils.type.Node.TreeNode;
+import com.utils.type.builder.LawEntryTreeBuilder;
 import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.MailerBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @Controller
@@ -28,8 +25,7 @@ public class IndexController {
     private SysLawEntryService lawEntryService;
     @Autowired
     HttpServletRequest request;
-/*    @Autowired
-    HttpServletResponse response;*/
+
 
 
     @RequestMapping(value="/index", method = RequestMethod.GET)
@@ -48,8 +44,8 @@ public class IndexController {
         List<SysLawEntry> entries = lawEntryService.list_Study_LawEntries();
         if (entries == null || entries.size() == 0)
             return "";
-        String content = nodes2Content(builder.entry2ContentNode(entries));
-        sendLawMail(content);
+        String content = MailSimple.nodes2Content(builder.entry2ContentNode(entries));
+        MailSimple.sendLawMail(content,"法硕学习");
 
         return treeCss2Content(content,"./js/tree.css");
     }
@@ -64,7 +60,7 @@ public class IndexController {
         List<SysLawEntry> entries = lawEntryService.list_LastHard_LawEntries();
         if (entries == null || entries.size() == 0)
             return "";
-        String content = nodes2Content(builder.entry2ContentNode(entries));
+        String content = MailSimple.nodes2Content(builder.entry2ContentNode(entries));
 
         return treeCss2Content(content,"././js/tree.css");
     }
@@ -82,7 +78,7 @@ public class IndexController {
         List<SysLawEntry> entries = lawEntryService.list_Study_All();
         if (entries == null || entries.size() == 0)
             return "";
-        String content = nodes2Content(builder.entry2ContentNode(entries));
+        String content = MailSimple.nodes2Content(builder.entry2ContentNode(entries));
 
         return treeCss2Content(content,"./js/tree.css");
     }
@@ -97,7 +93,7 @@ public class IndexController {
         List<SysLawEntry> entries = lawEntryService.list_Hard();
         if (entries == null || entries.size() == 0)
             return "";
-        String content = nodes2Content(builder.entry2ContentNode(entries));
+        String content = MailSimple.nodes2Content(builder.entry2ContentNode(entries));
 
         return treeCss2Content(content,"./js/tree.css");
     }
@@ -126,56 +122,6 @@ public class IndexController {
     }
 
 
-
-
-
-
-    /**
-     * law_0 得到的 Node 转为实际的邮件内容
-     * @param nodes
-     * @return
-     */
-    public String nodes2Content(List<TreeNode> nodes)
-    {
-        String content ="";
-        int count = 0;
-        if (nodes != null && nodes.size() != 0) {
-            for (TreeNode node : nodes) {
-                //最末节点增加序号
-                if (null == node.getChildren()  || 0 == node.getChildren().size() ){
-                    node.setName((++count)+". "+node.getName());
-                }
-
-                if("1" == node.getId() )
-                {
-                    content += "<h"+node.getId()+">"+node.getName() + "</h"+node.getId()+">" + nodes2Content(node.getChildren());
-                }else{
-                    content += "<ul><li>"+node.getName() + "</span></li><ul>"+ nodes2Content(node.getChildren()) +"</ul></ul>";
-                }
-            }
-        }
-        return content;
-    }
-
-
-    /**
-     * 发生邮件自己发给自己
-     * @param content
-     */
-    public void sendLawMail(String content)
-    {
-        Email email = EmailBuilder.startingBlank()
-                .from("法硕学习", "chiromath@sohu.com")
-                .to("DreamLife", "chiromath@sohu.com")
-                .withSubject("Law EntryReview")
-                .withHTMLText(content)
-                .buildEmail();
-
-        MailerBuilder.withSMTPServer("smtp.sohu.com", 25, "chiromath", "118512Qq")
-                .buildMailer().sendMail(email);
-
-
-    }
 
 
 
