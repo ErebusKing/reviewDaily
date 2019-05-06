@@ -12,5 +12,8 @@ public interface SysLawEntryService {
 
     List<SysLawEntry> list_Study_All();
 
+    List<SysLawEntry> list_LastHard_LawEntries();
+
+    List<SysLawEntry> list_Hard();
 
 }

@@ -36,6 +36,33 @@
         ORDER BY l.discipline,l.chapter,l.createDate,l.lev desc
     </select>
 
+    <select id="list_LastHard_LawEntries" resultMap="mapList">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+        lawEntry_0 l
+        WHERE
+        (l.createDate IN ( CURDATE( ) - INTERVAL 2 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 3 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 5 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 8 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 16 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 31 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 91 DAY )
+        OR l.createDate IN ( CURDATE( ) - INTERVAL 181 DAY ))
+        and l.lev>=3
+        ORDER BY l.discipline,l.chapter,l.createDate,l.lev desc
+    </select>
+
+    <select id="list_Hard" resultMap="mapList">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+        lawEntry_0 l
+        WHERE l.lev>=3
+        ORDER BY l.discipline,l.chapter,l.createDate,l.lev desc
+    </select>
+
     <select id="list_Study_All" resultMap="mapList">
         SELECT
         <include refid="Base_Column_List" />

@@ -30,5 +30,15 @@ public class SysLawEntryServiceImpl implements SysLawEntryService {
         return sysLawEntryMapper.list_Study_All();
     }
 
+    @Override
+    public List<SysLawEntry> list_LastHard_LawEntries() {
+        return sysLawEntryMapper.list_LastHard_LawEntries();
+    }
+
+    @Override
+    public List<SysLawEntry> list_Hard() {
+        return sysLawEntryMapper.list_Hard();
+    }
+
 
 }

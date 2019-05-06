@@ -54,6 +54,25 @@ public class IndexController {
         return treeCss2Content(content,"./js/tree.css");
     }
 
+
+
+    @ResponseBody
+    @RequestMapping(value="/lastHard", method = RequestMethod.GET)
+    public String lastEntryList(){
+        System.out.println("获得重点复习的法学数据");
+        LawEntryTreeBuilder builder = new LawEntryTreeBuilder();
+        List<SysLawEntry> entries = lawEntryService.list_LastHard_LawEntries();
+        if (entries == null || entries.size() == 0)
+            return "";
+        String content = nodes2Content(builder.entry2ContentNode(entries));
+
+        return treeCss2Content(content,"././js/tree.css");
+    }
+
+
+
+
+
     @ResponseBody
     @RequestMapping(value="/all", method = RequestMethod.GET)
     public String lawEntryAll()
@@ -61,6 +80,21 @@ public class IndexController {
         System.out.println("查询所有法学数据");
         LawEntryTreeBuilder builder = new LawEntryTreeBuilder();
         List<SysLawEntry> entries = lawEntryService.list_Study_All();
+        if (entries == null || entries.size() == 0)
+            return "";
+        String content = nodes2Content(builder.entry2ContentNode(entries));
+
+        return treeCss2Content(content,"./js/tree.css");
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value="/hard", method = RequestMethod.GET)
+    public String lawEntryHard()
+    {
+        System.out.println("查询所有法学数据重点--记忆错误3次以上");
+        LawEntryTreeBuilder builder = new LawEntryTreeBuilder();
+        List<SysLawEntry> entries = lawEntryService.list_Hard();
         if (entries == null || entries.size() == 0)
             return "";
         String content = nodes2Content(builder.entry2ContentNode(entries));
