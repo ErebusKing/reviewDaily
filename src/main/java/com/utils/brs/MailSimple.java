@@ -4,6 +4,7 @@ import com.utils.type.Node.TreeNode;
 import org.simplejavamail.email.Email;
 import org.simplejavamail.email.EmailBuilder;
 import org.simplejavamail.mailer.MailerBuilder;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -51,6 +52,9 @@ public class MailSimple {
             for (TreeNode node : nodes) {
                 //最末节点增加序号
                 if (null == node.getChildren()  || 0 == node.getChildren().size() ){
+                    if(StringUtils.isEmpty(node.getName())){
+                        continue;
+                    }
                     node.setName((++count)+". "+node.getName());
                 }
 
